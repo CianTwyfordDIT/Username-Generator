@@ -35,18 +35,23 @@ public class ItemGenerator{
 		for(int i=0;i<input.length();i++){
 			if(input.charAt(i)=='A'){
 					strBuff.append('a');
+					numVowels++;
                 }
 				else if(input.charAt(i)=='E'){
 					strBuff.append('e');
+					numVowels++;
                 }
 				else if(input.charAt(i)=='I'){
 					strBuff.append('i');
+					numVowels++;
                 }
 				else if(input.charAt(i)=='O'){
 					strBuff.append('o');
+					numVowels++;
 				}
 				else if(input.charAt(i)=='U'){
 					strBuff.append('u');
+					numVowels++;
 				}
 				else if(input.charAt(i)==' '){
 					strBuff.append(numLetters);
@@ -58,26 +63,55 @@ public class ItemGenerator{
 		}
 
 		output=strBuff.toString();
-		strBuff.delete(0,strBuff.length());
-		numLetters=0;
-		numVowels=0;
 	}
 	public void countv(){
-			for(int j=0;j<input.length();j++){
-				if(input.charAt(j)=='A' || input.charAt(j)=='E'  || input.charAt(j)=='I'  || input.charAt(j)=='O'  || input.charAt(j)=='U'){
-					numVowels++;
+			strBuff.append(numVowels);
+			output=strBuff.toString();
 			}
-		}
+	
+	public void reset()
+	{
+		strBuff.delete(0, strBuff.length());
+		input="";
+		output="";
+		numLetters=0;
+		numVowels=0;
 	}
 
 	//get
 	public String getOutput(){
 		return output;
 	}
-	public int getNumLetters(){
-		return numLetters;
-	}
-	public int getNumVowels(){
-		return numVowels;
+	
+	//Q2
+		//vars
+
+		private String[] paragraphs;
+		private int[] numV;
+
+		//method
+
+		public int[] computeV(String[] paragraphs){
+
+		//set
+
+		this.paragraphs=paragraphs;
+		numV=new int [paragraphs.length];
+		for(int i=0;i<paragraphs.length;i++){
+
+		//create var count
+		int vowelCounter=0;
+		//create temp string to check vowel in each paragraph
+		String temp=paragraphs[i];
+		//once vowel is identified it is added
+		for(int j=0;j<temp.length();j++){
+			if(temp.charAt(j)=='a'||temp.charAt(j)=='e'||temp.charAt(j)=='i'||temp.charAt(j)=='o'||temp.charAt(j)=='u'||temp.charAt(j)=='A'||temp.charAt(j)=='E'||temp.charAt(j)=='I'||temp.charAt(j)=='O'||temp.charAt(j)=='U'){
+			vowelCounter++;
+			}
+		}
+		//numV array is updated with the vowel count from each paragraph
+		numV[i]=vowelCounter;
+		}
+		return numV;
 	}
 }

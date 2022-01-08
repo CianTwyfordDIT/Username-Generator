@@ -8,10 +8,7 @@ public class ItemGeneratorApp{
 		//declare vars
 
 		String initialString;
-		String secondLetter;
-		String vowelReplaceString;
-		int letterCount;
-		int vowelCount;
+		String output;
 		String tryAgain;
 		tryAgain="yes";
 		String msg="Please enter your full name";
@@ -20,12 +17,6 @@ public class ItemGeneratorApp{
 
 		ItemGenerator slg;
 		slg=new ItemGenerator();
-		ItemGenerator rp;
-		rp=new ItemGenerator();
-		ItemGenerator lc;
-		lc=new ItemGenerator();
-		ItemGenerator vc;
-		vc=new ItemGenerator();
 
 		//input
 
@@ -35,30 +26,54 @@ public class ItemGeneratorApp{
 		//set
 
 		slg.setInput(initialString);
-		rp.setInput(initialString);
-		lc.setInput(initialString);
-		vc.setInput(initialString);
 
 		//compute
 
 		slg.generateNewString();
-		rp.replaceVowels();
-		lc.count();
-		vc.countv();
+		slg.count();
+		slg.replaceVowels();
+		slg.countv();
 
 		//get
 
-		secondLetter=slg.getOutput();
-		vowelReplaceString=rp.getOutput();
-		letterCount=lc.getNumLetters();
-		vowelCount=vc.getNumVowels();
-
+		output=slg.getOutput();
+		
+		slg.reset();
+		
 		//output
 
-		JOptionPane.showMessageDialog(null, "Your generated username is "+secondLetter +vowelReplaceString +letterCount +vowelCount);
+		JOptionPane.showMessageDialog(null, "Your generated username is "+output);
 
 		//generate another username
 		tryAgain=JOptionPane.showInputDialog(null,"Would you like to generate another username? Please type in Yes or No");
 		}
-	}
+		
+		//Q2
+				//vars
+
+				int numP;
+				String[] paragraphs;
+
+				//input - by entering the number of paragraphs (numP) we also get the length of the array
+
+				numP=Integer.parseInt(JOptionPane.showInputDialog(null, "Please enter number of paragraphs!"));
+				paragraphs=new String[numP];
+
+				//each paragraph entered will be stored in an array
+
+				for(int i=0;i<paragraphs.length;i++){
+				paragraphs[i]=JOptionPane.showInputDialog(null, "Please enter your paragraph!");
+				}
+
+				//compute
+
+				int[] numV = slg.computeV(paragraphs);
+
+				//output
+
+				for(int i=0;i<paragraphs.length;i++){
+				JOptionPane.showMessageDialog(null, "For the following paragraph: " +paragraphs[i]);
+				JOptionPane.showMessageDialog(null, "the number of vowels found is: " +numV[i]);
+				}
+			}
 }
