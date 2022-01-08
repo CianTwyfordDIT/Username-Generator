@@ -6,7 +6,7 @@ public class ItemGenerator
 	private String input;
 	private StringBuffer strBuff;
 	private String output;
-	private int vowelCount;
+	private int vowelCount; //count number of vowels changing case 
 	
 	//constructor
 	public ItemGenerator()
@@ -17,12 +17,13 @@ public class ItemGenerator
 	}
 	
 	//set
-	public void setInput(String x)
+	public void setInput(String name)
 	{
-		input = x;
+		input = name;
 	}
 	
 	//compute
+	//begin username with penultimate letter
 	public void penultimateLetter()
 	{
 		strBuff.append(input.charAt(input.length() - 2));
@@ -30,6 +31,7 @@ public class ItemGenerator
 	}
 	
 	//compute
+	//replace upper case vowels with lower case
 	public void replaceVowels()
 	{
 		for(int i = 0; i < input.length(); i++)
@@ -40,7 +42,7 @@ public class ItemGenerator
 			{
 				String replacement = String.valueOf(input.charAt(i)).toLowerCase();
 				strBuff.append(replacement);
-				vowelCount++;
+				vowelCount++; //keep count of changes
 			}
 			else
 			{
@@ -51,16 +53,17 @@ public class ItemGenerator
 	}
 	
 	//compute
+	//replace any space with *number of characters in string* + '-'
 	public void spaceReplace()
 	{
 		//get string character length and add hyphen
 		String replacement = String.valueOf(input.length()) + '-';
 		
-		for(int i = 0; i < input.length(); i++)
+		for(int i = 0; i < strBuff.length(); i++)
 		{
-			if(input.charAt(i) == ' ')
+			if(strBuff.charAt(i) == ' ')
 			{
-				strBuff.replace(i + 1, i + 2, replacement);
+				strBuff.replace(i, i + 1, replacement);
 			}
 		}
 		
@@ -68,6 +71,7 @@ public class ItemGenerator
 	}
 	
 	//compute
+	//append number of vowel changes to end of username
 	public void vowelCount()
 	{
 		strBuff.append(String.valueOf(vowelCount));
